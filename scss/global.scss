@@ -1,0 +1,97 @@
+/* global.scss */
+
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+// Color Variables
+$primary-color: #3498db;
+$secondary-color: #2ecc71;
+
+// Font and Typography Variables
+$primary-font: "Work Sans", sans-serif;
+$body-weight: 300;
+$heading-weight: 400;
+$base-font-size: 16px;
+$heading-font-size: 60px;
+$base-spacing: 10px;
+$transition-speed: 0.5s;
+
+// Global Styles
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+    transition: all $transition-speed ease;
+    line-height: 1.35;
+    font-family: $primary-font;
+    font-weight: $body-weight;
+    font-optical-sizing: auto;
+}
+
+// Typography Mixins
+@mixin heading($size, $weight, $spacing) {
+    font-size: $size;
+    font-weight: $weight;
+    margin-bottom: $spacing;
+}
+
+// Reusable Mixin for Grid Layouts
+@mixin gridCard($rows, $columns, $gap: 0) {
+    display: grid;
+    grid-template-columns: $columns;
+    grid-template-rows: $rows;
+    gap: $gap;
+    place-items: center;
+    text-align: center;
+}
+
+// Animation Mixins
+@mixin smoothTransition($property: all) {
+    transition: $property $transition-speed ease;
+}
+
+@mixin fadeIn {
+    animation: fadeIn $transition-speed ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+// Typography Styles
+h1 {
+    @include heading($heading-font-size, $heading-weight, $base-spacing * 3);
+}
+
+h2 {
+    @include heading($heading-font-size - 10px, $heading-weight, $base-spacing * 3);
+}
+
+h3 {
+    @include heading($heading-font-size - 35px, $heading-weight, $base-spacing);
+}
+
+p {
+    font-size: $base-font-size * 1.15;
+    max-width: 640px;
+    margin: 0 auto $base-spacing * 2 auto;
+}
+
+nav {
+    height: 100vh;
+    @include smoothTransition;
+}
+
+body.preview {}
+
+.collapse #navGroup {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, 1fr);
+}
